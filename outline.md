@@ -8,7 +8,6 @@ Job:
     Salary
     category 
     experience
-    gender
     
     apply job
     post job    

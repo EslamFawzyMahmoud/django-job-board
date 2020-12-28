@@ -1,6 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
 # Create your models here.
 from django.utils.text import slugify
+
 '''
 Django model field:
     -html widget
@@ -20,6 +22,7 @@ def image_upload(instance,filename):
 
 
 class Job(models.Model): #table
+    owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name='job_owner')
     title= models.CharField(max_length=100)  #column
     #location
     job_type=models.CharField(max_length=15,choices=JOB_TYPE)
@@ -30,21 +33,18 @@ class Job(models.Model): #table
     experience=models.IntegerField(default=1)
     category=models.ForeignKey('Category',on_delete=models.CASCADE)
     image=models.ImageField(upload_to=image_upload)
+
     #http://127.0.0.1:8000/Job/(web-developer)
     #go to html file and edit (id -->slug) in line 126 and 140
     slug=models.SlugField(null=True,blank=True)
-
-
     def save(self,*args,**kwargs):
         self.slug=slugify(self.title)
         super(Job,self).save(*args,**kwargs)
-
     def __str__(self):
         return self.title
 
 class Category(models.Model):
     name=models.CharField(max_length=25)
-
     def __str__(self):
         return self.name
 

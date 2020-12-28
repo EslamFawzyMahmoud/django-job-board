@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #my apps
-
     'Job',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +128,4 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 MEDIA_URL = '/media/'
+MEDIA_ROOT= BASE_DIR / "media"
